@@ -1,0 +1,45 @@
+{
+  "name": "spider-pig",
+  "version": "1.0.0",
+  "description": "Get a list of local URL links on a root URL.",
+  "main": "SpiderPig.js",
+  "bin": {
+    "spiderpig": "./cmd.js"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachleat/spider-pig.git"
+  },
+  "keywords": [
+    "spider",
+    "urls",
+    "chrome",
+    "puppeteer"
+  ],
+  "author": {
+    "name": "Zach Leatherman",
+    "email": "zachleatherman@gmail.com",
+    "url": "https://zachleat.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zachleat/spider-pig/issues"
+  },
+  "homepage": "https://github.com/zachleat/spider-pig#readme",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "normalize-url": "^2.0.1",
+    "puppeteer": "^1.0.0",
+    "url-regex": "^4.1.1"
+  },
+  "devDependencies": {
+    "ava": "^0.24.0",
+    "connect": "^3.6.5",
+    "debug": "^3.1.0",
+    "pify": "^3.0.0",
+    "serve-static": "^1.13.1"
+  }
+}
