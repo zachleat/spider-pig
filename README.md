@@ -1,6 +1,6 @@
 # spider-pig
 
-Get a list of local URL links on a root URL.
+Get a list of local URL links from a root URL.
 
 ## Installation
 

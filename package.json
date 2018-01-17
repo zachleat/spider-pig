@@ -1,7 +1,7 @@
 {
   "name": "@zachleat/spider-pig",
   "version": "1.0.0",
-  "description": "Get a list of local URL links on a root URL.",
+  "description": "Get a list of local URL links from a root URL.",
   "main": "SpiderPig.js",
   "bin": {
     "spiderpig": "./cmd.js"
