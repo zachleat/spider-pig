@@ -17,3 +17,9 @@ http://zachleat.localhost/web/about/
 http://zachleat.localhost/web/best-of/
 … etc.
 ```
+
+### Debug mode
+
+```
+$ DEBUG=SpiderPig spiderpig http://zachleat.localhost/web/
+```
