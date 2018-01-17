@@ -4,6 +4,8 @@ Get a list of local URL links on a root URL.
 
 ## Installation
 
+Available on [npm](https://www.npmjs.com/package/@zachleat/spider-pig).
+
 ```
 npm install @zachleat/spider-pig
 ```
