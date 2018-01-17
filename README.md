@@ -2,6 +2,12 @@
 
 Get a list of local URL links on a root URL.
 
+## Installation
+
+```
+npm install @zachleat/spider-pig
+```
+
 ## Usage
 
 ```
