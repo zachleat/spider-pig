@@ -76,20 +76,22 @@ $ DEBUG=SpiderPig spiderpig http://zachleat.localhost/web/
 ```
 const SpiderPig = require("@zachleat/spider-pig");
 
-let sp = new SpiderPig();
-await sp.start();
+(async function() {
+	let sp = new SpiderPig();
+	await sp.start();
 
-let urls = await sp.fetchLocalUrls("http://localhost/myproject/");
+	let urls = await sp.fetchLocalUrls("http://localhost/myproject/");
 
-// Optional, filter (case sensitive)
-urls = sp.filterUrls(urls, "views");
+	// Optional, filter (case sensitive)
+	urls = sp.filterUrls(urls, "views");
 
-// Optional
-for(let url of urls) {
-	if( await sp.hasSelector(url, ".test-css-selector:nth-child(2)") ) {
-		// has it
-	} else {
-		// doesn’t have it
+	// Optional
+	for(let url of urls) {
+		if( await sp.hasSelector(url, ".test-css-selector:nth-child(2)") ) {
+			// has it
+		} else {
+			// doesn’t have it
+		}
 	}
-}
+})();
 ```
