@@ -65,11 +65,26 @@ class SpiderPig {
 		return page;
 	}
 
-	async urlHasSelector(url, selector) {
-		let page = await this.getPage(url);
-		let hasSelector = await page.$$(selector);
+	async hasSelector(localUrl, sel) {
+		let browser = await puppeteer.launch();
+		let page = await browser.newPage();
+		await page.goto(localUrl, {
+			waitUntil: ["load", "networkidle0"]
+		});
+		let ret = await page.$$(sel);
+		browser.close();
 
-		return hasSelector.length > 0;
+		return ret.length > 0;
+	}
+
+	filterUrls(hrefs, filter) {
+		return hrefs.filter(function(href) {
+			if( filter && href.indexOf(filter) === -1) {
+				debug(`Ignored ${href}, does not meet filter \`${filter}\``);
+				return false;
+			}
+			return true;
+		});
 	}
 
 	async fetchLocalUrls(url) {

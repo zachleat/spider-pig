@@ -66,6 +66,13 @@ test("files/root.html", async t => {
 
 	t.deepEqual( urls, expected );
 
+	let urlsFiltered = sp.filterUrls(urls, "test");
+	let expectedFiltered = [
+		"http://localhost:8080/test.html",
+		"http://localhost:8080/test2.html",
+	];
+	t.deepEqual( urlsFiltered, expectedFiltered );
+
 	await sp.finish();
 
 	closeServer(server);
