@@ -7,20 +7,26 @@ import SpiderPig from "../SpiderPig";
 
 const sitePath = __dirname;
 const urlRoot = "http://localhost:8080/";
+const globalServer = openServer();
 
 function openServer() {
 	return new Promise(function(resolve, reject) {
 		let server = connect().use(serveStatic(sitePath)).listen(8080, function() {
-			console.log(`Web server started on 8080 for ${sitePath}.`);
+			// console.log(`Web server started on 8080 for ${sitePath}.`);
 			resolve(server);
 		});
 	});
 }
 
-function closeServer(server) {
+test.before(async t => {
+	await globalServer;
+});
+
+test.after.always(async t => {
+	let server = await globalServer;
 	server.close();
-	console.log( "Web server closed." );
-}
+	// console.log( "Web server closed." );
+});
 
 test("cleanupHref", t => {
 	let sp = new SpiderPig();
@@ -51,13 +57,10 @@ test("isValidToAdd", t => {
 });
 
 test("files/root.html", async t => {
-	let url = urlRoot + "files/root.html";
-
 	let sp = new SpiderPig();
 	await sp.start();
-	let server = await openServer();
 
-	let urls = await sp.fetchLocalUrls(url);
+	let urls = await sp.fetchLocalUrls(urlRoot + "files/root.html");
 	let expected = [
 		"http://localhost:8080/test.html",
 		"http://localhost:8080/test2.html",
@@ -74,6 +77,16 @@ test("files/root.html", async t => {
 	t.deepEqual( urlsFiltered, expectedFiltered );
 
 	await sp.finish();
+});
 
-	closeServer(server);
+test(".selector()", async t => {
+	let sp = new SpiderPig();
+	await sp.start();
+
+	t.is( await sp.selectorCount(urlRoot + "files/hasselector.html", ".myselector" ), 3 );
+	t.is( await sp.selectorCount(urlRoot + "files/hasselector.html", ".madeupselector" ), 0 );
+	t.is( await sp.selectorCount(urlRoot + "files/doesnothaveselector.html", ".myselector" ), 0 );
+	t.is( await sp.selectorCount(urlRoot + "files/doesnothaveselector.html", "div" ), 3 );
+
+	await sp.finish();
 });

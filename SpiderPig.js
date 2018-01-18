@@ -65,16 +65,21 @@ class SpiderPig {
 		return page;
 	}
 
-	async hasSelector(localUrl, sel) {
+	async selectorCount(url, sel) {
 		let browser = await puppeteer.launch();
 		let page = await browser.newPage();
-		await page.goto(localUrl, {
+		await page.goto(url, {
 			waitUntil: ["load", "networkidle0"]
 		});
 		let ret = await page.$$(sel);
 		browser.close();
 
-		return ret.length > 0;
+		return ret.length;
+	}
+
+	async hasSelector(url, sel) {
+		let results = await this.selectorCount(url, sel);
+		return results > 0;
 	}
 
 	filterUrls(hrefs, filter) {

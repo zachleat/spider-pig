@@ -39,8 +39,8 @@ debug( `spider-pig for root url: ${url}` );
 			}
 
 			let localUrl = urls[j];
-			let has = await sp.hasSelector(localUrl, selector);
-			console.log( `${localUrl}`, has ? chalk.green("✅  Yes") : chalk.red("❌  No") );
+			let resultCount = await sp.selectorCount(localUrl, selector);
+			console.log( `${localUrl}`, resultCount > 0 ? chalk.green(`✅  Yes (${resultCount} result${resultCount !== 1 ? "s" : ""})`) : chalk.red("❌  No") );
 		}
 	}
 
