@@ -1,6 +1,6 @@
 # spider-pig
 
-Get a list of local URL links from a root URL.
+Get a list of local URL links from a root URL. Works with JavaScript generated content.
 
 ```
 <a href="test.html">Test</a><!-- match -->
@@ -31,8 +31,62 @@ http://zachleat.localhost/web/best-of/
 … etc.
 ```
 
+### Filter URLs
+
+```
+$ spiderpig http://zachleat.localhost/web/ --filter="/about/"
+http://zachleat.localhost/web/about/
+```
+
+### Show URLs that contain a CSS Selector
+
+Useful to see where CSS changes might regress on a project. This takes a bit of time. You can also mix in `--filter` here too.
+
+```
+$ spiderpig http://zachleat.localhost/web/ --selector=".header"
+Found 180 urls.
+Looking for urls with CSS selector ".header":
+http://zachleat.localhost/web/ ✅  Yes
+http://zachleat.localhost/web/about/ ✅  Yes
+http://zachleat.localhost/web/best-of/ ✅  Yes
+http://zachleat.localhost/web/projects/ ✅  Yes
+```
+
+#### Add a limit
+
+Use `--selectorlimit` to set an upper bound on the number of URLs that get spidered.
+
+```
+$ spiderpig http://zachleat.localhost/web/ --selector=".header" --selectorlimit=3
+Found 180 urls
+Looking for urls with CSS selector ".header" (limit 3):
+http://zachleat.localhost/web/ ✅  Yes
+http://zachleat.localhost/web/about/ ✅  Yes
+http://zachleat.localhost/web/best-of/ ✅  Yes
+```
+
 ### Debug mode
 
 ```
 $ DEBUG=SpiderPig spiderpig http://zachleat.localhost/web/
+```
+
+### API
+
+```
+let sp = new SpiderPig();
+await sp.start();
+
+let urls = await sp.fetchLocalUrls("http://localhost/myproject/");
+
+// Optional
+urls = sp.filterUrls(urls, "views");
+
+for(let url of urls) {
+	if( await sp.hasSelector(url, ".test-css-selector:nth-child(2)") ) {
+		// has it
+	} else {
+		// doesn’t have it
+	}
+}
 ```
