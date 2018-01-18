@@ -28,7 +28,7 @@ $ spiderpig http://zachleat.localhost/web/
 http://zachleat.localhost/web/
 http://zachleat.localhost/web/about/
 http://zachleat.localhost/web/best-of/
-… etc.
+…
 ```
 
 ### Filter URLs
@@ -63,6 +63,7 @@ Looking for urls with CSS selector ".header" (limit 3):
 http://zachleat.localhost/web/ ✅  Yes
 http://zachleat.localhost/web/about/ ✅  Yes
 http://zachleat.localhost/web/best-of/ ✅  Yes
+…
 ```
 
 ### Debug mode
