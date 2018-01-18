@@ -1,6 +1,6 @@
 # spider-pig
 
-Get a list of local URL links from a root URL. Works with JavaScript generated content.
+Get a list of local URL links from a root URL. Works with JavaScript generated content. Can also act as a live-DOM CSS search across multiple files (find all the templates that are using the CSS selector I want to change).
 
 ```
 <a href="test.html">Test</a><!-- match -->
@@ -96,3 +96,7 @@ const SpiderPig = require("@zachleat/spider-pig");
 	}
 })();
 ```
+
+##
+
+![Homer Simpson holding the Spider Pig](docs/spider-pig.jpg)
