@@ -74,6 +74,8 @@ $ DEBUG=SpiderPig spiderpig http://zachleat.localhost/web/
 
 ### API
 
+#### Get URLs
+
 ```
 const SpiderPig = require("@zachleat/spider-pig");
 
@@ -85,10 +87,24 @@ const SpiderPig = require("@zachleat/spider-pig");
 
 	// Optional, filter (case sensitive)
 	urls = sp.filterUrls(urls, "views");
+})();
+```
 
-	// Optional
+#### Search for a selector
+
+```
+const SpiderPig = require("@zachleat/spider-pig");
+
+(async function() {
+	let sp = new SpiderPig();
+	let selector = ".test-css-selector:nth-child(2)";
+
+	await sp.start();
+
+	let urls = await sp.fetchLocalUrls("http://localhost/myproject/");
+
 	for(let url of urls) {
-		if( await sp.hasSelector(url, ".test-css-selector:nth-child(2)") ) {
+		if( await sp.hasSelector(url, selector) ) {
 			// has it
 		} else {
 			// doesn’t have it
