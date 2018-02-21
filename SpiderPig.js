@@ -14,6 +14,10 @@ class SpiderPig {
 		return await page.evaluate('document.location.origin');
 	}
 
+	async getFullUrl(page) {
+		return await page.evaluate('document.location.href');
+	}
+
 	cleanupHref(href, origin) {
 		let url = new URL(href, origin);
 		return normalizeUrl(url.toString(), {
@@ -32,8 +36,12 @@ class SpiderPig {
 		return href.indexOf(origin) === 0;
 	}
 
-	isValidToAdd(url, origin) {
+	isValidToAdd(url, origin, fullUrl) {
 		url = this.cleanupHref(url, origin);
+		
+		if( fullUrl && url === this.cleanupHref(fullUrl)) {
+			return false;
+		}
 
 		if( !url ||
 			this.duplicates[ url ] ||
@@ -97,6 +105,7 @@ class SpiderPig {
 		let page = await this.getPage(url);
 
 		const origin = await this.getOrigin(page);
+		const fullUrl = await this.getFullUrl(page);
 		debug( "Found origin: %o", origin );
 		const hrefs = await page.$$eval("a[href]", links => {
 			return links.map(function(href) {
@@ -106,9 +115,9 @@ class SpiderPig {
 		debug( "Found link hrefs: %o", hrefs );
 
 		for( let href of hrefs ) {
-			href = this.cleanupHref(href, origin);
-			debug("Cleaned href: %o", href);
-			if( this.isValidToAdd( href, origin ) ) {
+			href = this.cleanupHref(href, fullUrl);
+			debug("Cleaned href: %o (origin: %o)", href, fullUrl);
+			if( this.isValidToAdd( href, origin, fullUrl ) ) {
 				this.addCleanedUrl(href);
 				urls.push(href);
 			}
@@ -121,7 +130,7 @@ class SpiderPig {
 		if( !this.browser ) {
 			throw new Error("this.browser doesn’t exist, did you run .start()?");
 		}
-		this.browser.close();
+		await this.browser.close();
 	}
 }
 

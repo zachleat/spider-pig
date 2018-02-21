@@ -33,6 +33,8 @@ test("cleanupHref", t => {
 	t.is( sp.cleanupHref("test.html", "http://localhost/"), "http://localhost/test.html" );
 	t.is( sp.cleanupHref("test.html#content", "http://localhost/"), "http://localhost/test.html" );
 	t.is( sp.cleanupHref("http://localhost:8080/test.html#content", "http://localhost:8080/"), "http://localhost:8080/test.html" );
+	t.is( sp.cleanupHref("http://localhost:8080/files/root.html#content", "http://localhost:8080/"), "http://localhost:8080/files/root.html" );
+	t.is( sp.cleanupHref("http://localhost:8080/test.html#content"), "http://localhost:8080/test.html" );
 });
 
 test("isLocalHref", t => {
@@ -62,17 +64,15 @@ test("files/root.html", async t => {
 
 	let urls = await sp.fetchLocalUrls(urlRoot + "files/root.html");
 	let expected = [
-		"http://localhost:8080/test.html",
-		"http://localhost:8080/test2.html",
-		"http://localhost:8080/root.html",
+		"http://localhost:8080/files/test.html",
+		"http://localhost:8080/files/test2.html",
 	];
 
 	t.deepEqual( urls, expected );
 
-	let urlsFiltered = sp.filterUrls(urls, "test");
+	let urlsFiltered = sp.filterUrls(urls, "test2");
 	let expectedFiltered = [
-		"http://localhost:8080/test.html",
-		"http://localhost:8080/test2.html",
+		"http://localhost:8080/files/test2.html",
 	];
 	t.deepEqual( urlsFiltered, expectedFiltered );
 
