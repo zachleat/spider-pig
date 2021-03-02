@@ -37,10 +37,16 @@
     "url-regex": "^4.1.1"
   },
   "devDependencies": {
-    "ava": "^0.24.0",
+    "ava": "^3.15.0",
     "connect": "^3.6.5",
     "debug": "^3.1.0",
+    "esm": "^3.2.25",
     "pify": "^3.0.0",
     "serve-static": "^1.13.1"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
   }
 }
