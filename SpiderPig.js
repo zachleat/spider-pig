@@ -1,5 +1,4 @@
 const puppeteer = require("puppeteer");
-// const urlRegex = require("url-regex");
 const normalizeUrl = require("normalize-url");
 const { URL } = require("url");
 const debug = require("debug")("SpiderPig");
