@@ -16,7 +16,6 @@ if(!url) {
 }
 
 debug( `spider-pig for root url: ${url}` );
-
 (async function() {
 	let sp = new SpiderPig();
 	await sp.start();
@@ -40,7 +39,7 @@ debug( `spider-pig for root url: ${url}` );
 
 			let localUrl = urls[j];
 			let resultCount = await sp.selectorCount(localUrl, selector);
-			console.log( `${localUrl}`, resultCount > 0 ? chalk.green(`✅  Yes (${resultCount} result${resultCount !== 1 ? "s" : ""})`) : chalk.red("❌  No") );
+			console.log( `${j+1}: ${localUrl}`, resultCount > 0 ? chalk.green(`✅  Yes (${resultCount} result${resultCount !== 1 ? "s" : ""})`) : chalk.red("❌  No") );
 		}
 	}
 

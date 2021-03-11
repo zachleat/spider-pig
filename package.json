@@ -30,17 +30,16 @@
   },
   "homepage": "https://github.com/zachleat/spider-pig#readme",
   "dependencies": {
-    "chalk": "^2.3.0",
-    "minimist": "^1.2.0",
-    "normalize-url": "^2.0.1",
-    "puppeteer": "^1.0.0",
-    "url-regex": "^4.1.1"
+    "chalk": "^4.1.0",
+    "minimist": "^1.2.5",
+    "normalize-url": "^5.3.0",
+    "puppeteer": "^8.0.0"
   },
   "devDependencies": {
-    "ava": "^0.24.0",
-    "connect": "^3.6.5",
-    "debug": "^3.1.0",
-    "pify": "^3.0.0",
-    "serve-static": "^1.13.1"
+    "ava": "^3.15.0",
+    "connect": "^3.7.0",
+    "debug": "^4.3.1",
+    "pify": "^5.0.0",
+    "serve-static": "^1.14.1"
   }
 }

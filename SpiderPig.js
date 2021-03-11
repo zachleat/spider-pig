@@ -1,5 +1,4 @@
 const puppeteer = require("puppeteer");
-// const urlRegex = require("url-regex");
 const normalizeUrl = require("normalize-url");
 const { URL } = require("url");
 const debug = require("debug")("SpiderPig");
@@ -21,6 +20,7 @@ class SpiderPig {
 	cleanupHref(href, origin) {
 		let url = new URL(href, origin);
 		return normalizeUrl(url.toString(), {
+			stripHash: true,
 			stripWWW: false,
 			stripFragment: true,
 			normalizeHttps: false,

@@ -1,9 +1,9 @@
-import test from "ava";
-import path from "path";
-import pifiy from "pify";
-import connect from "connect";
-import serveStatic from "serve-static";
-import SpiderPig from "../SpiderPig";
+const test = require("ava");
+const path = require("path");
+const pifiy = require("pify");
+const connect = require("connect");
+const serveStatic = require("serve-static");
+const SpiderPig = require("../SpiderPig");
 
 const sitePath = __dirname;
 const urlRoot = "http://localhost:8080/";
