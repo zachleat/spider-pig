@@ -80,7 +80,7 @@ class SpiderPig {
 			waitUntil: ["load", "networkidle0"]
 		});
 		let ret = await page.$$(sel);
-		browser.close();
+		await browser.close();
 
 		return ret.length;
 	}

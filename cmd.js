@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const puppeteer = require("puppeteer");
 const chalk = require("chalk");
 const argv = require("minimist")(process.argv.slice(2));
 const SpiderPig = require("./SpiderPig");
