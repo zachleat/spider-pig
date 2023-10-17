@@ -50,6 +50,7 @@ class SpiderPig {
 		   	url.indexOf( "sms:" ) === 0 || 
 		   	url.indexOf( "fax:" ) === 0 || 
 		   	url.indexOf( "callto:" ) === 0 || 
+		   	url.indexOf( "javascript:" ) === 0 || 
 			!this.isLocalHref(url, origin) ) {
 
 			return false;
