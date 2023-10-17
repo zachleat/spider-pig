@@ -46,6 +46,11 @@ class SpiderPig {
 		if( !url ||
 			this.duplicates[ url ] ||
 			url.indexOf( "mailto:" ) === 0 || // is email link
+		   	url.indexOf( "tel:" ) === 0 || 
+		   	url.indexOf( "sms:" ) === 0 || 
+		   	url.indexOf( "fax:" ) === 0 || 
+		   	url.indexOf( "callto:" ) === 0 || 
+		   	url.indexOf( "javascript:" ) === 0 || 
 			!this.isLocalHref(url, origin) ) {
 
 			return false;
