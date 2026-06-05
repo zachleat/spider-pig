@@ -1,6 +1,5 @@
 const puppeteer = require("puppeteer");
 const normalizeUrl = require("normalize-url");
-const { URL } = require("url");
 const debug = require("debug")("SpiderPig");
 
 class SpiderPig {
@@ -64,11 +63,24 @@ class SpiderPig {
 		this.urls.push( url );
 	}
 
+	async getBrowser() {
+		if(!this.browser) {
+			throw new Error("Missing browser instance. Did you call start?");
+		}
+
+		return this.browser;
+	}
+
 	async start() {
-		this.browser = await puppeteer.launch();
+		this.browser = await puppeteer.launch({
+			headless: "new",
+			args: ['--no-sandbox', '--disable-setuid-sandbox'],
+		});
 	}
 
 	async getPage(url) {
+		await this.getBrowser();
+
 		let page = await this.browser.newPage();
 
 		await page.goto(url, {
@@ -79,13 +91,16 @@ class SpiderPig {
 	}
 
 	async selectorCount(url, sel) {
-		let browser = await puppeteer.launch();
-		let page = await browser.newPage();
+		await this.getBrowser();
+
+		let page = await this.browser.newPage();
 		await page.goto(url, {
 			waitUntil: ["load", "networkidle0"]
 		});
 		let ret = await page.$$(sel);
-		await browser.close();
+
+		// Breaking v4: this no longer closes the browser (need to call finish)
+		// await browser.close();
 
 		return ret.length;
 	}
@@ -132,9 +147,7 @@ class SpiderPig {
 	}
 
 	async finish() {
-		if( !this.browser ) {
-			throw new Error("this.browser doesn’t exist, did you run .start()?");
-		}
+		await this.getBrowser();
 		await this.browser.close();
 	}
 }
