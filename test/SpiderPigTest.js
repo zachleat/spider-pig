@@ -1,6 +1,5 @@
 const test = require("ava");
 const path = require("path");
-const pifiy = require("pify");
 const connect = require("connect");
 const serveStatic = require("serve-static");
 const SpiderPig = require("../SpiderPig");
