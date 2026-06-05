@@ -26,18 +26,18 @@ npm install @zachleat/spider-pig
 ## Usage
 
 ```
-$ spiderpig http://zachleat.localhost/web/
-http://zachleat.localhost/web/
-http://zachleat.localhost/web/about/
-http://zachleat.localhost/web/best-of/
+$ spiderpig http://localhost:8080/
+http://localhost:8080/
+http://localhost:8080/about/
+http://localhost:8080/best-of/
 …
 ```
 
 ### Filter URLs
 
 ```
-$ spiderpig http://zachleat.localhost/web/ --filter="/about/"
-http://zachleat.localhost/web/about/
+$ spiderpig http://localhost:8080/ --filter="/about/"
+http://localhost:8080/about/
 ```
 
 ### Show URLs that contain a CSS Selector
@@ -45,13 +45,13 @@ http://zachleat.localhost/web/about/
 Useful to see where CSS changes might regress on a project. This takes a bit of time. You can also mix in `--filter` here too.
 
 ```
-$ spiderpig http://zachleat.localhost/web/ --selector=".header"
+$ spiderpig http://localhost:8080/ --selector=".header"
 Found 180 urls.
 Looking for urls with CSS selector ".header":
-http://zachleat.localhost/web/ ✅  Yes
-http://zachleat.localhost/web/about/ ✅  Yes
-http://zachleat.localhost/web/best-of/ ✅  Yes
-http://zachleat.localhost/web/projects/ ✅  Yes
+http://localhost:8080/ ✅  Yes
+http://localhost:8080/about/ ✅  Yes
+http://localhost:8080/best-of/ ✅  Yes
+http://localhost:8080/projects/ ✅  Yes
 ```
 
 #### Add a limit
@@ -59,19 +59,19 @@ http://zachleat.localhost/web/projects/ ✅  Yes
 Use `--selectorlimit` to set an upper bound on the number of URLs that get spidered.
 
 ```
-$ spiderpig http://zachleat.localhost/web/ --selector=".header" --selectorlimit=3
+$ spiderpig http://localhost:8080/ --selector=".header" --selectorlimit=3
 Found 180 urls
 Looking for urls with CSS selector ".header" (limit 3):
-http://zachleat.localhost/web/ ✅  Yes
-http://zachleat.localhost/web/about/ ✅  Yes
-http://zachleat.localhost/web/best-of/ ✅  Yes
+http://localhost:8080/ ✅  Yes
+http://localhost:8080/about/ ✅  Yes
+http://localhost:8080/best-of/ ✅  Yes
 …
 ```
 
 ### Debug mode
 
 ```
-$ DEBUG=SpiderPig spiderpig http://zachleat.localhost/web/
+$ DEBUG=SpiderPig spiderpig http://localhost:8080/
 ```
 
 ### API
