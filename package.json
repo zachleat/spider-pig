@@ -37,7 +37,7 @@
     "puppeteer": "^25.1.0"
   },
   "devDependencies": {
-    "ava": "^6.4.1",
+    "ava": "^8.0.1",
     "connect": "^3.7.0",
     "serve-static": "^2.2.1"
   }
